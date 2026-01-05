@@ -348,14 +348,3 @@ export default function App() {
 
   return <AppFactory />;
 }
-```
-
-6. **Commit changes**
-
-7. **Vercel vai fazer redeploy automático** (~1-2 min)
-
----
-
-## 🔐 **SENHA PADRÃO:**
-```
-fabrica2026
