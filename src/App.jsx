@@ -225,4 +225,137 @@ function AppFactory() {
           )}
 
           <button
-            onClick={gener
+            onClick={generateApp}
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-yellow-400 to-pink-500 text-white font-bold py-4 px-6 rounded-xl hover:from-yellow-500 hover:to-pink-600 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 text-lg shadow-lg"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="w-6 h-6" />
+                Gerando app e criando repositório...
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-6 h-6" />
+                Gerar App Automaticamente
+              </>
+            )}
+          </button>
+        </div>
+
+        {result && (
+          <div className="space-y-6">
+            <div className="bg-gradient-to-br from-green-900/50 to-emerald-900/50 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-green-400/30">
+              <div className="flex items-center gap-3 mb-6">
+                <CheckCircle2 className="w-12 h-12 text-green-400" />
+                <div>
+                  <h2 className="text-3xl font-bold">🎉 App Criado com Sucesso!</h2>
+                  <p className="text-green-200">Repositório criado e GitHub Actions está compilando o APK</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="bg-black/30 rounded-xl p-6 border border-green-400/20">
+                  <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                    <Code2 className="w-5 h-5" />
+                    Repositório GitHub:
+                  </h3>
+                  <a 
+                    href={result.repoUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-300 hover:text-blue-200 underline flex items-center gap-2"
+                  >
+                    {result.repoUrl}
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+
+                <div className="bg-black/30 rounded-xl p-6 border border-green-400/20">
+                  <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                    <Rocket className="w-5 h-5" />
+                    GitHub Actions (Compilação):
+                  </h3>
+                  <a 
+                    href={result.actionsUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-300 hover:text-blue-200 underline flex items-center gap-2 mb-3"
+                  >
+                    Ver progresso da compilação
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                  <p className="text-sm text-green-100">
+                    ⏱️ Tempo estimado: 10-15 minutos
+                  </p>
+                </div>
+
+                <div className="bg-green-500/20 border border-green-400/50 rounded-xl p-6">
+                  <h3 className="font-bold text-lg mb-3">📋 Próximos passos:</h3>
+                  <ol className="space-y-2 text-sm text-green-100 list-decimal list-inside">
+                    <li>Clique em "Ver progresso da compilação" acima</li>
+                    <li>Aguarde o GitHub Actions terminar (~10-15 min)</li>
+                    <li>Quando terminar, clique na ação completada</li>
+                    <li>Role até "Artifacts" e baixe "app-release"</li>
+                    <li>Descompacte o ZIP e terá o APK pronto!</li>
+                    <li>Instale no Android e teste o sistema de trial de {trialDays} dias</li>
+                  </ol>
+                </div>
+
+                <div className="bg-purple-500/20 border border-purple-400/50 rounded-xl p-6">
+                  <h3 className="font-bold text-lg mb-3">🔑 Sistema de Trial Integrado:</h3>
+                  <ul className="space-y-2 text-sm text-purple-100">
+                    <li>✅ Período de teste: {trialDays} dias</li>
+                    <li>✅ Banner mostrando dias restantes</li>
+                    <li>✅ Bloqueio automático após expiração</li>
+                    <li>✅ Tela de ativação de licença</li>
+                    <li>✅ Chaves de licença no formato: XXXX-XXXX-XXXX-XXXX</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-12 grid md:grid-cols-3 gap-6">
+          <div className="bg-white/5 backdrop-blur rounded-2xl p-6 border border-white/10">
+            <div className="text-4xl mb-3">🤖</div>
+            <h3 className="font-bold text-lg mb-2">100% Automático</h3>
+            <p className="text-sm text-blue-200">GitHub Actions compila o APK na nuvem</p>
+          </div>
+          <div className="bg-white/5 backdrop-blur rounded-2xl p-6 border border-white/10">
+            <div className="text-4xl mb-3">🔐</div>
+            <h3 className="font-bold text-lg mb-2">Sistema de Trial</h3>
+            <p className="text-sm text-blue-200">Período de teste configurável integrado</p>
+          </div>
+          <div className="bg-white/5 backdrop-blur rounded-2xl p-6 border border-white/10">
+            <div className="text-4xl mb-3">⚡</div>
+            <h3 className="font-bold text-lg mb-2">Rápido</h3>
+            <p className="text-sm text-blue-200">APK pronto em 10-15 minutos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  if (!isAuthenticated) {
+    return <LoginScreen onLogin={() => setIsAuthenticated(true)} />;
+  }
+
+  return <AppFactory />;
+}
+```
+
+6. **Commit changes**
+
+7. **Vercel vai fazer redeploy automático** (~1-2 min)
+
+---
+
+## 🔐 **SENHA PADRÃO:**
+```
+fabrica2026
