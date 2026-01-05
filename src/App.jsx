@@ -113,7 +113,7 @@ function AppFactory() {
     setResult(null);
 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/generate`, {
+      const response = await fetch(`${BACKEND_URL}/api/generate-app`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
